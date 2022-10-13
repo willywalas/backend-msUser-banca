@@ -7,4 +7,5 @@ public interface PersonaService {
     ResponseEntity<?> createPersona(Persona persona);
     ResponseEntity<?> loginPersona(Persona persona);
     ResponseEntity<?> getAllPersona();
+    ResponseEntity<?> deletePersonaById(Long personaId);
 }

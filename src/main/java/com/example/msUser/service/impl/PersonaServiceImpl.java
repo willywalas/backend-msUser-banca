@@ -37,4 +37,12 @@ public class PersonaServiceImpl implements PersonaService {
         List<Persona> personas= StreamSupport.stream(personaRepository.findAll().spliterator(),false).collect(Collectors.toList());
         return new ResponseEntity<>(personas,HttpStatus.OK);
     }
+    @Override
+    public ResponseEntity<?> deletePersonaById(Long personaId) {
+        if(!personaRepository.findById(personaId).isPresent()){
+            return ResponseEntity.notFound().build();
+        }
+        personaRepository.deleteById(personaId);
+        return ResponseEntity.ok().build();
+    }
 }

@@ -52,4 +52,16 @@ public class PersonaController {
 
         return responseEntity;
     }
+    @CrossOrigin(origins = "*")
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable(value="id")Long personaId){
+        ResponseEntity<?>responseEntity=null;
+        try {
+            responseEntity=personaService.deletePersonaById(personaId);
+        } catch (Exception e) {
+            responseEntity=new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return responseEntity;
+    }
 }
