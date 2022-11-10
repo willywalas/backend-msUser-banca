@@ -45,4 +45,10 @@ public class PersonaServiceImpl implements PersonaService {
         personaRepository.deleteById(personaId);
         return ResponseEntity.ok().build();
     }
+
+    @Override
+    public ResponseEntity<?> filterAutorizationPersona(Long passed) {
+        List<Persona> personas=personaRepository.findByPassed(passed);
+        return new ResponseEntity<>(personas,HttpStatus.OK);
+    }
 }

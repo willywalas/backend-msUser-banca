@@ -15,6 +15,9 @@ public interface PersonaRepository extends JpaRepository<Persona,Long> {
     @Transactional(readOnly = true)
     Optional<Persona> findByEmailAndPassword(String email, String password);
 
+    @Transactional(readOnly = true)
+    List<Persona> findByPassed(Long passed);
+
     @Override
     @Transactional(readOnly = true)
     List<Persona> findAll();

@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+
 @RestController
 @RequestMapping("/persona")
 public class PersonaController {
@@ -41,11 +43,24 @@ public class PersonaController {
     }
 
     @CrossOrigin(origins = "*")
-    @GetMapping
+    @GetMapping()
     public ResponseEntity<?> readAll(){
         ResponseEntity<?>responseEntity=null;
         try {
             responseEntity=personaService.getAllPersona();
+        } catch (Exception e) {
+            responseEntity=new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return responseEntity;
+    }
+
+    @CrossOrigin(origins = "*")
+    @GetMapping("/statusAutorization/{status}")
+    public ResponseEntity<?> statusAutorization(@PathVariable(value="status")Long statusAutorization){
+        ResponseEntity<?>responseEntity=null;
+        try {
+            responseEntity=personaService.filterAutorizationPersona(statusAutorization);
         } catch (Exception e) {
             responseEntity=new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -64,4 +79,17 @@ public class PersonaController {
 
         return responseEntity;
     }
+
+    /*@CrossOrigin(origins = "*")
+    @GetMapping("/statusAutorization")
+    public ResponseEntity<?> statusAutorization(){
+        ResponseEntity<?>responseEntity=null;
+        try {
+            responseEntity=personaService.getAllPersona();
+        } catch (Exception e) {
+            responseEntity=new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        return responseEntity;
+    }*/
 }

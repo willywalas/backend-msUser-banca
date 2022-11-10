@@ -17,6 +17,7 @@ public class Persona implements Serializable {
     private String tipeuser;
     private String email;
     private String password;
+    private int passed;
 
     public Long getId() {
         return id;
@@ -64,5 +65,13 @@ public class Persona implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getPassed() {
+        return passed;
+    }
+
+    public void setPassed(int passed) {
+        this.passed = passed;
     }
 }
