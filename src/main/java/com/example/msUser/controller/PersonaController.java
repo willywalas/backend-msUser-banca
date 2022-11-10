@@ -80,16 +80,27 @@ public class PersonaController {
         return responseEntity;
     }
 
-    /*@CrossOrigin(origins = "*")
-    @GetMapping("/statusAutorization")
-    public ResponseEntity<?> statusAutorization(){
+    @CrossOrigin(origins = "*")
+    @PutMapping("/recoveryAccount")
+    public ResponseEntity<?> recoveryAccount(@RequestBody Persona personaDetails){
         ResponseEntity<?>responseEntity=null;
         try {
-            responseEntity=personaService.getAllPersona();
+            responseEntity=personaService.updatePersonaById(personaDetails);
         } catch (Exception e) {
             responseEntity=new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
         }
-
         return responseEntity;
-    }*/
+    }
+
+    @CrossOrigin(origins = "*")
+    @PostMapping("/aprovedRequestAccount")
+    public ResponseEntity<?> aproveRequest(@RequestBody Persona personaDetails){
+        ResponseEntity<?>responseEntity=null;
+        try {
+            responseEntity=personaService.aproveRequest(personaDetails);
+        } catch (Exception e) {
+            responseEntity=new ResponseEntity<>(e,HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        return responseEntity;
+    }
 }

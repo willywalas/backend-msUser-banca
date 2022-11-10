@@ -9,4 +9,6 @@ public interface PersonaService {
     ResponseEntity<?> getAllPersona();
     ResponseEntity<?> deletePersonaById(Long personaId);
     ResponseEntity<?> filterAutorizationPersona(Long passed);
+    ResponseEntity<?> updatePersonaById(Persona personaDetails);
+    ResponseEntity<?> aproveRequest(Persona personaDetails);
 }

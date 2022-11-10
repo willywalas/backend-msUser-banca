@@ -21,4 +21,7 @@ public interface PersonaRepository extends JpaRepository<Persona,Long> {
     @Override
     @Transactional(readOnly = true)
     List<Persona> findAll();
+
+    @Transactional(readOnly = true)
+    Optional<Persona> findByEmail(String email);
 }

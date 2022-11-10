@@ -51,4 +51,29 @@ public class PersonaServiceImpl implements PersonaService {
         List<Persona> personas=personaRepository.findByPassed(passed);
         return new ResponseEntity<>(personas,HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<?> updatePersonaById(Persona personaDetails) {
+        Optional<Persona> persona=personaRepository.findByEmail(personaDetails.getEmail());
+
+        if(!persona.isPresent()){
+            return ResponseEntity.notFound().build();
+        }
+
+        persona.get().setPassword(personaDetails.getPassword());
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(personaRepository.save(persona.get()));
+    }
+
+    @Override
+    public ResponseEntity<?> aproveRequest(Persona personaDetails) {
+        Optional<Persona> persona=personaRepository.findById(personaDetails.getId());
+        if(!persona.isPresent()){
+            return ResponseEntity.notFound().build();
+        }
+
+        persona.get().setPassed((long) 1);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(personaRepository.save(persona.get()));
+    }
 }
